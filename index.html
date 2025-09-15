@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Portafolio Personal - Carlos Coto</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Importaciones de fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    /* Estilos generales */
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    :root {
+      --primary-color: #0d47a1;
+      --secondary-color: #1976d2;
+      --accent-color: #ffcc00;
+      --text-color: #333;
+      --light-text: #ffffff;
+      --background-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --transition-speed: 0.3s;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    .profile-container {
+      position: relative;
+      z-index: 2;
+      margin: 2rem 0;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+    
+    /* Encabezado */
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    header p {
+      font-style: italic;
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+    header {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.9), rgba(25, 118, 210, 0.8));
+      z-index: 1;
+    }
+    
+    header > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    header img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-top: 20px;
+      border: 5px solid white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    header img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    .scroll-indicator a {
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    
+    .scroll-indicator a:hover {
+      opacity: 1;
+    }
+    nav {
+      background: #0d47a1;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a i {
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    nav a:hover i {
+      transform: scale(1.2);
+    }
+    nav a:hover {
+      color: #ffcc00;
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    section:nth-child(even) {
+      background-color: #f0f4f8;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      font-size: 2.2rem;
+      position: relative;
+      padding-bottom: 15px;
+      text-align: center;
+    }
+    
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent-color);
+    }
+    
+    /* Estilos para el gráfico de fortalezas */
+    .strength-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .strength-container ul {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .strength-chart {
+      flex: 1;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 250px;
+      min-width: 300px;
+      background: rgba(25, 118, 210, 0.05);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .chart-bar {
+      width: 40px;
+      background: linear-gradient(to top, var(--primary-color), var(--accent-color));
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    
+    .chart-bar:before {
+      content: attr(data-strength);
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      text-align: center;
+      width: 80px;
+    }
+    .analisis, .liderazgo, .proposito {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid #0d47a1;
+    }
+    
+    .analisis:hover, .liderazgo:hover, .proposito:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    /* Estilos para la sección de liderazgo */
+    .leadership-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    
+    .leadership-vision, .leadership-style {
+      flex: 1;
+      min-width: 300px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .leadership-vision:hover, .leadership-style:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    
+    .leadership-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .leadership-pillars {
+      list-style: none;
+      margin-top: 15px;
+    }
+    
+    .leadership-pillars li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .leadership-pillars li i {
+      margin-right: 10px;
+      color: var(--secondary-color);
+    }
+    
+    /* Estilos para la sección de propósito */
+    .purpose-quote {
+      text-align: center;
+      margin-bottom: 40px;
+      font-style: italic;
+      position: relative;
+    }
+    
+    .purpose-quote i {
+      color: var(--accent-color);
+      font-size: 1.5rem;
+    }
+    
+    .purpose-quote blockquote {
+      font-size: 1.3rem;
+      margin: 10px 0;
+      color: var(--secondary-color);
+    }
+    
+    .purpose-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .purpose-mission, .purpose-values {
+      flex: 1;
+      min-width: 300px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .purpose-icon {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .values-list {
+      list-style: none;
+      margin-top: 15px;
+    }
+    
+    .values-list li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .values-list li:before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+    }
+    
+    .purpose-impact {
+      margin-top: 40px;
+    }
+    
+    .impact-areas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .impact-item {
+      flex: 1;
+      min-width: 250px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .impact-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .impact-item i {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    /* Estilos para la sección de contacto */
+    .contacto-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    
+    .contacto-info, .contacto-form {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .contacto-details {
+      margin-top: 30px;
+    }
+    
+    .contacto-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .contacto-item i {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      margin-right: 15px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+    
+    .btn-submit {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    /* Estilos para el footer */
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-logo, .footer-links, .footer-social {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .footer-logo h3 {
+      margin-bottom: 15px;
+      color: white;
+    }
+    
+    .footer-links h4, .footer-social h4 {
+      color: white;
+      margin-bottom: 15px;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links ul li a:hover {
+      color: white;
+    }
+    
+    .footer-social .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    
+    .footer-social .social-icons a:hover {
+      background-color: var(--accent-color);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+    }
+    
+    .footer-bottom p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .footer-bottom i {
+      color: #ff6b6b;
+    }
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid #0d47a1;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.05), rgba(25, 118, 210, 0.05));
+      transition: top 0.5s ease;
+      z-index: 0;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    
+    .card:hover::before {
+      top: 0;
+    }
+    
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+    .card svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+      fill: #0d47a1;
+      transition: transform 0.5s ease;
+    }
+    
+    .card:hover svg {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .social-icons {
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      color: white;
+      font-size: 24px;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+    
+    .social-icons a:hover {
+      color: #ffcc00;
+    }
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-align: center;
+      padding: 50px 30px 30px;
+      margin-top: 60px;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: #f4f6f9;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Portada -->
+  <header id="inicio">
+    <div class="particles-container"></div>
+    <h1>Carlos Coto</h1>
+    <p class="tagline">"El éxito se construye día a día con disciplina, propósito y pasión."</p>
+    <div class="profile-container">
+      <img src="foto.jpg.jpg" alt="Foto personal de Carlos Coto" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 24 24"><path fill="%23ffffff" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>';">
+    </div>
+    <div class="scroll-indicator">
+      <a href="#via">
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Menú -->
+  <nav>
+    <a href="#via"><i class="fas fa-clipboard-check"></i> Test VIA</a>
+    <a href="#liderazgo"><i class="fas fa-users"></i> Liderazgo</a>
+    <a href="#proposito"><i class="fas fa-compass"></i> Propósito</a>
+    <a href="#valores"><i class="fas fa-heart"></i> Valores</a>
+  </nav>
+
+  <!-- Resultados VIA -->
+  <section id="via">
+    <h2><i class="fas fa-clipboard-check"></i> Resultados y análisis del Test VIA</h2>
+    <div class="analisis">
+      <h3>Mis 5 fortalezas principales:</h3>
+      <div class="strength-container">
+        <ul>
+          <li><i class="fas fa-hammer"></i> Perseverancia</li>
+          <li><i class="fas fa-balance-scale"></i> Responsabilidad</li>
+          <li><i class="fas fa-eye"></i> Honestidad</li>
+          <li><i class="fas fa-book"></i> Amor por aprender</li>
+          <li><i class="fas fa-hands"></i> Gratitud</li>
+        </ul>
+        <div class="strength-chart">
+          <div class="chart-bar" style="height: 95%" data-strength="Perseverancia"></div>
+          <div class="chart-bar" style="height: 90%" data-strength="Responsabilidad"></div>
+          <div class="chart-bar" style="height: 85%" data-strength="Honestidad"></div>
+          <div class="chart-bar" style="height: 80%" data-strength="Amor por aprender"></div>
+          <div class="chart-bar" style="height: 75%" data-strength="Gratitud"></div>
+        </div>
+      </div>
+      <p>
+        Estas fortalezas reflejan mi compromiso, ética y motivación por crecer. 
+        La <b>perseverancia</b> me impulsa a terminar lo que empiezo, 
+        la <b>responsabilidad</b> asegura que cumpla mis compromisos, 
+        y la <b>honestidad</b> fortalece la confianza en mis relaciones. 
+        El <b>amor por aprender</b> me mantiene en constante desarrollo 
+        y la <b>gratitud</b> me ayuda a valorar lo que tengo.
+      </p>
+      <p>
+        El Test VIA (Values in Action) es una evaluación científica que identifica las fortalezas de carácter que más utilizamos. Estas fortalezas son rasgos positivos que reflejan nuestra identidad, impulsan nuestro desempeño y contribuyen a nuestro bienestar. Conocerlas me ha permitido enfocarme en lo que hago mejor y potenciar mi desarrollo personal y profesional.
+      </p>
+    </div>
+  </section>
+
+  <!-- Liderazgo -->
+  <section id="liderazgo">
+    <h2><i class="fas fa-users"></i> Reflexión sobre mi visión y estilo de liderazgo</h2>
+    <div class="liderazgo">
+      <div class="leadership-container">
+        <div class="leadership-vision">
+          <i class="fas fa-lightbulb leadership-icon"></i>
+          <h3>Mi Visión</h3>
+          <p>Ser un líder que inspire confianza, fomente la colaboración y potencie el desarrollo personal y profesional de los demás.</p>
+          <p>Aspiro a crear entornos donde cada persona pueda desarrollar su máximo potencial, contribuyendo con sus talentos únicos a un propósito común que genere impacto positivo.</p>
+        </div>
+        <div class="leadership-style">
+          <i class="fas fa-handshake leadership-icon"></i>
+          <h3>Mi Estilo</h3>
+          <p>Me identifico con el liderazgo <b>transformacional</b>, porque busco motivar con el ejemplo, y con el <b>liderazgo servicial</b>, poniendo primero el bienestar de mi equipo.</p>
+          <p>Creo que el verdadero liderazgo es inspirar a otros a crecer mientras se alcanzan objetivos colectivos. Mi enfoque se basa en cinco pilares fundamentales:</p>
+          <ul class="leadership-pillars">
+            <li><i class="fas fa-comment"></i> Comunicación clara y transparente</li>
+            <li><i class="fas fa-brain"></i> Mentoría y desarrollo de talentos</li>
+            <li><i class="fas fa-chart-line"></i> Orientación a resultados con propósito</li>
+            <li><i class="fas fa-heart"></i> Empatía y conexión humana</li>
+            <li><i class="fas fa-shield-alt"></i> Integridad y coherencia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Propósito -->
+  <section id="proposito">
+    <h2><i class="fas fa-compass"></i> Mi misión y propósito de vida</h2>
+    <div class="proposito">
+      <div class="purpose-quote">
+        <i class="fas fa-quote-left"></i>
+        <blockquote>El propósito no es solo lo que hacemos, sino por qué y para quién lo hacemos.</blockquote>
+        <i class="fas fa-quote-right"></i>
+      </div>
+      
+      <div class="purpose-container">
+        <div class="purpose-mission">
+          <i class="fas fa-bullseye purpose-icon"></i>
+          <h3>Mi Propósito</h3>
+          <p>Mi propósito de vida es <b>contribuir al desarrollo de las personas y a la innovación en la industria</b>, generando procesos eficientes y con impacto positivo en la sociedad.</p>
+          <p>Busco crear soluciones que no solo resuelvan problemas técnicos, sino que también mejoren la calidad de vida de las personas y contribuyan a un mundo más sostenible y equitativo.</p>
+        </div>
+        
+        <div class="purpose-values">
+          <i class="fas fa-star purpose-icon"></i>
+          <h3>Mis Valores como Guía</h3>
+          <p>Justifico este propósito en mis valores fundamentales:</p>
+          <ul class="values-list">
+            <li><b>Responsabilidad</b> - Para cumplir con mis compromisos y asumir las consecuencias de mis acciones.</li>
+            <li><b>Honestidad</b> - Para construir relaciones basadas en la confianza y la transparencia.</li>
+            <li><b>Gratitud</b> - Para reconocer lo recibido y mantener una actitud de aprecio constante.</li>
+            <li><b>Perseverancia</b> - Para superar obstáculos y mantener el rumbo hacia mis objetivos.</li>
+            <li><b>Amor por aprender</b> - Para crecer constantemente y adaptarme a un mundo en cambio.</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="purpose-impact">
+        <h3><i class="fas fa-hands-helping"></i> Áreas de Impacto</h3>
+        <div class="impact-areas">
+          <div class="impact-item">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>Educación</h4>
+            <p>Compartir conocimiento y experiencias para potenciar el desarrollo de otros.</p>
+          </div>
+          <div class="impact-item">
+            <i class="fas fa-cogs"></i>
+            <h4>Innovación</h4>
+            <p>Crear soluciones que transformen positivamente procesos y sistemas.</p>
+          </div>
+          <div class="impact-item">
+            <i class="fas fa-seedling"></i>
+            <h4>Sostenibilidad</h4>
+            <p>Promover prácticas que equilibren el progreso con el cuidado del entorno.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="valores">
+    <h2><i class="fas fa-heart"></i> Mis valores</h2>
+    <div class="galeria">
+      <div class="card">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,17V16H9V14H13V13H10A1,1 0 0,1 9,12V9A1,1 0 0,1 10,8H11V7H13V8H15V10H11V11H14A1,1 0 0,1 15,12V15A1,1 0 0,1 14,16H13V17H11Z"/>
+        </svg>
+        <h3>Responsabilidad</h3>
+        <p>"Cumplir con mis compromisos es parte de mi identidad."</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+        </svg>
+        <h3>Honestidad</h3>
+        <p>"La verdad es la base de la confianza."</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z"/>
+        </svg>
+        <h3>Gratitud</h3>
+        <p>"Reconocer lo que recibimos multiplica lo que damos."</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13,2.03V2.05L13,4.05C17.39,4.59 20.5,8.58 19.96,12.97C19.5,16.61 16.64,19.5 13,19.93V21.93C18.5,21.38 22.5,16.5 21.95,11C21.5,6.25 17.73,2.5 13,2.03M11,2.06C9.05,2.25 7.19,3 5.67,4.26L7.1,5.74C8.22,4.84 9.57,4.26 11,4.06V2.06M4.26,5.67C3,7.19 2.25,9.04 2.05,11H4.05C4.24,9.58 4.8,8.23 5.69,7.1L4.26,5.67M2.06,13C2.26,14.96 3.03,16.81 4.27,18.33L5.69,16.9C4.81,15.77 4.24,14.42 4.06,13H2.06M7.1,18.37L5.67,19.74C7.18,21 9.04,21.79 11,22V20C9.58,19.82 8.23,19.25 7.1,18.37M16.82,15.19L12.71,11.08C13.12,10.04 12.89,8.82 12.03,7.97C11.13,7.06 9.78,6.88 8.69,7.38L10.63,9.32L9.28,10.68L7.29,8.73C6.75,9.82 7,11.17 7.88,12.08C8.74,12.94 9.96,13.16 11,12.76L15.11,16.86C15.29,17.05 15.56,17.05 15.74,16.86L16.78,15.83C17,15.65 17,15.33 16.82,15.19Z"/>
+        </svg>
+        <h3>Perseverancia</h3>
+        <p>"El esfuerzo constante vence cualquier obstáculo."</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+        </svg>
+        <h3>Amor por aprender</h3>
+        <p>"El conocimiento es una inversión que siempre da frutos."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2><i class="fas fa-paper-plane"></i> Conectemos</h2>
+    <div class="contacto-container">
+      <div class="contacto-info">
+        <h3>¿Interesado en colaborar?</h3>
+        <p>Estoy siempre abierto a nuevas oportunidades, proyectos interesantes y conexiones profesionales. No dudes en contactarme para conversar sobre cómo podemos trabajar juntos.</p>
+        <div class="contacto-details">
+          <div class="contacto-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>García, Nuevo León, México</p>
+          </div>
+          <div class="contacto-item">
+            <i class="fas fa-envelope"></i>
+            <p>cotoc7614@gmail.com</p>
+          </div>
+          <div class="contacto-item">
+            <i class="fas fa-phone"></i>
+            <p>+52 564332850</p>
+          </div>
+        </div>
+      </div>
+      <div class="contacto-form">
+        <form action="#" method="post">
+          <div class="form-group">
+            <input type="text" placeholder="Nombre" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Correo electrónico" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Asunto">
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Mensaje" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>Carlos Coto</h3>
+        <p>Profesional comprometido con la excelencia y la innovación</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#via">Test VIA</a></li>
+          <li><a href="#liderazgo">Liderazgo</a></li>
+          <li><a href="#proposito">Propósito</a></li>
+          <li><a href="#valores">Valores</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Conecta conmigo</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Carlos Coto - Portafolio Personal | Hecho con <i class="fas fa-heart"></i> y dedicación</p>
+    </div>
+  </footer>
+
+  <!-- Script para animaciones y funcionalidades -->
+  <script>
+    // Función para animar las barras de fortalezas al hacer scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const chartBars = document.querySelectorAll('.chart-bar');
+      
+      function animateOnScroll() {
+        chartBars.forEach(bar => {
+          const barPosition = bar.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (barPosition < screenPosition) {
+            bar.style.opacity = '1';
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll(); // Iniciar animación si las barras ya están visibles
+    });
+  </script>
+
+</body>
+</html>
+
